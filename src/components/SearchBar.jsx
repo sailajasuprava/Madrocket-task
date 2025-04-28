@@ -24,7 +24,7 @@ const typesList = [
 function SearchBar() {
   const { query, setQuery, filter, setFilter } = useSearch();
   return (
-    <div className="w-screen p-4 flex gap-10 items-center">
+    <div className="w-screen p-4 flex flex-col sm:flex-row gap-10 items-center">
       <input
         type="text"
         placeholder="Search Pokémon by name..."
@@ -39,7 +39,7 @@ function SearchBar() {
           required
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="border p-2 w-full"
+          className="border-2 border-stone-700 px-4 py-2 rounded-md focus:outline-none"
         >
           <option value="">Select category</option>
           {typesList.map((type) => (
