@@ -22,7 +22,7 @@ const typesList = [
 ];
 
 function SearchBar() {
-  const { query, setQuery, filter, setFilter } = useSearch();
+  const { query, setQuery, filter, setFilter, sortBy, setSortBy } = useSearch();
   return (
     <div className="w-screen p-4 flex flex-col sm:flex-row gap-10 items-center">
       <input
@@ -47,6 +47,20 @@ function SearchBar() {
               {type}
             </option>
           ))}
+        </select>
+      </div>
+
+      <div>
+        <select
+          name="sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="border-2 border-stone-700 px-4 py-2 rounded-md focus:outline-none"
+        >
+          <option value="">Sort by... </option>
+          <option value="id">ID</option>
+          <option value="nameAsc">Name (A-Z)</option>
+          <option value="nameDesc">Name (Z-A)</option>
         </select>
       </div>
     </div>

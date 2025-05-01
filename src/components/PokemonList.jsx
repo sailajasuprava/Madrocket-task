@@ -7,7 +7,7 @@ import Spinner from "./Spinner";
 const ITEMS_PER_PAGE = 10;
 
 function PokemonList() {
-  const { isLoading, pokemons, query, filter } = useSearch();
+  const { isLoading, pokemons, query, filter, sortBy } = useSearch();
   const [page, setPage] = useState(1);
 
   if (isLoading) return <Spinner />;
@@ -19,6 +19,20 @@ function PokemonList() {
   if (filter) {
     filteredPokemons = filteredPokemons.filter((pokemon) =>
       pokemon.types.some((typeInfo) => typeInfo.type.name === filter)
+    );
+  }
+
+  if (sortBy === "id") {
+    filteredPokemons = filteredPokemons.sort((a, b) => a.id - b.id);
+  }
+  if (sortBy === "nameAsc") {
+    filteredPokemons = filteredPokemons.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+  }
+  if (sortBy === "nameDesc") {
+    filteredPokemons = filteredPokemons.sort((a, b) =>
+      b.name.localeCompare(a.name)
     );
   }
 

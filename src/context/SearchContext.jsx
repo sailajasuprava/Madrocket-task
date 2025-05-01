@@ -5,10 +5,11 @@ import axios from "axios";
 const SearchContext = createContext();
 
 function SearchProvider({ children }) {
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("");
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
     fetchPokemons();
@@ -46,6 +47,8 @@ function SearchProvider({ children }) {
         isLoading,
         filter,
         setFilter,
+        sortBy,
+        setSortBy,
       }}
     >
       {children}
