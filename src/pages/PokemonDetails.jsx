@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useSearch } from "../context/SearchContext";
 import Spinner from "../components/Spinner";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 
 function PokemonDetails() {
   const { pokemonName } = useParams();
 
-  const { pokemons } = useSearch();
+  const { pokemons, favorites, toggleFavorite } = useSearch();
   const pokemon = pokemons.filter((item) => item.name === pokemonName)[0];
 
   if (!pokemon) return <Spinner />;
@@ -19,7 +20,22 @@ function PokemonDetails() {
           #{pokemon.id.toString().padStart(3, "0")}
         </span>
       </h1>
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+
+      {/* Favorite Button */}
+      <div className="text-center mt-2">
+        <button
+          className="cursor-pointer hover:text-red-500"
+          onClick={() => toggleFavorite(pokemon?.id)}
+        >
+          {favorites.includes(pokemon?.id) ? (
+            <IoIosHeart size={22} fill="red" />
+          ) : (
+            <IoIosHeartEmpty size={22} />
+          )}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-6">
         <div className="flex flex-col items-center text-center">
           <img
             src={
@@ -43,7 +59,7 @@ function PokemonDetails() {
         </div>
 
         {/* Info box */}
-        <div className="bg-blue-100 p-4 rounded-md w-full md:w-1/2">
+        <div className="bg-blue-100 p-4 rounded-md w-full">
           <h2 className="text-xl font-semibold mb-2">Info</h2>
           <div className="text-sm space-y-1">
             <p>

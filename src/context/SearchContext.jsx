@@ -10,10 +10,19 @@ function SearchProvider({ children }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
+
+  console.log(favorites);
 
   useEffect(() => {
     fetchPokemons();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   async function fetchPokemons() {
     try {
@@ -37,6 +46,12 @@ function SearchProvider({ children }) {
       setIsLoading(false);
     }
   }
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
+    );
+  };
   return (
     <SearchContext.Provider
       value={{
@@ -49,6 +64,9 @@ function SearchProvider({ children }) {
         setFilter,
         sortBy,
         setSortBy,
+        favorites,
+        setFavorites,
+        toggleFavorite,
       }}
     >
       {children}
