@@ -6,6 +6,7 @@ import SearchProvider from "./context/SearchContext.jsx";
 import PokemonProvider from "./context/PokemonContext.jsx";
 import FilterProvider from "./context/FilterContext.jsx";
 import FavoritesProvider from "./context/FavoritesContext.jsx";
+import SortProvider from "./context/SortContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")).render(
       <FavoritesProvider>
         <SearchProvider>
           <FilterProvider>
-            <App />
+            <SortProvider>
+              <App />
+            </SortProvider>
           </FilterProvider>
         </SearchProvider>
       </FavoritesProvider>

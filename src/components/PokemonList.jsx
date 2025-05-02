@@ -5,13 +5,15 @@ import PokemonCard from "./PokemonCard";
 import Spinner from "./Spinner";
 import { usePokemon } from "../context/PokemonContext";
 import { useFilter } from "../context/FilterContext";
+import { useSort } from "../context/SortContext";
 
 const ITEMS_PER_PAGE = 10;
 
 function PokemonList() {
   const { isLoading, pokemons } = usePokemon();
   const { query } = useSearch();
-  const { filter, sortBy } = useFilter();
+  const { filter } = useFilter();
+  const { sortBy } = useSort();
   const [page, setPage] = useState(1);
 
   if (isLoading) return <Spinner />;

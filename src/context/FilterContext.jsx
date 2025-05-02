@@ -4,15 +4,12 @@ const FilterContext = createContext();
 
 function FilterProvider({ children }) {
   const [filter, setFilter] = useState("");
-  const [sortBy, setSortBy] = useState("");
 
   return (
     <FilterContext.Provider
       value={{
         filter,
         setFilter,
-        sortBy,
-        setSortBy,
       }}
     >
       {children}
