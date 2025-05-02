@@ -69,7 +69,7 @@ function PokemonList() {
   return (
     <div className="flex-1 px-12">
       {/* pokemon listings */}
-      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {filteredPokemons.slice(start, end).map((pokemon) => (
           <PokemonCard key={pokemon.name} pokemon={pokemon} />
         ))}

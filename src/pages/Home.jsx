@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar";
 
 function Home() {
   return (
-    <main className="flex">
+    <main className="flex flex-col sm:flex-row">
       <SideBar />
       <PokemonList />
     </main>

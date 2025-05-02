@@ -16,26 +16,25 @@ function PokemonDetails() {
   return (
     <main className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Image and name */}
-      <h1 className="text-4xl text-center font-bold capitalize mt-4">
-        {pokemon.name}{" "}
+      <h1 className="text-4xl text-center font-bold flex gap-4 justify-center items-center capitalize mt-4">
+        <span>{pokemon.name} </span>
         <span className="text-gray-400">
           #{pokemon.id.toString().padStart(3, "0")}
         </span>
-      </h1>
-
-      {/* Favorite Button */}
-      <div className="text-center mt-2">
         <button
           className="cursor-pointer hover:text-red-500"
           onClick={() => toggleFavorite(pokemon?.id)}
         >
           {favorites.includes(pokemon?.id) ? (
-            <IoIosHeart size={22} fill="red" />
+            <IoIosHeart size={25} fill="red" />
           ) : (
-            <IoIosHeartEmpty size={22} />
+            <IoIosHeartEmpty size={25} />
           )}
         </button>
-      </div>
+      </h1>
+
+      {/* Favorite Button */}
+      <div className="text-center mt-2"></div>
 
       <div className="grid grid-cols-2 gap-6">
         <div className="flex flex-col items-center text-center">

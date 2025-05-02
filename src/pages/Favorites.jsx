@@ -6,7 +6,8 @@ function Favorites() {
   const { pokemons } = usePokemon();
   const { favorites } = useFavorites();
 
-  if (favorites.length === 0) return;
+  if (favorites.length === 0)
+    return <p className="text-4xl text-center">No favorites...</p>;
 
   const favoritesDetails = pokemons.filter((item) =>
     favorites.includes(item.id)
