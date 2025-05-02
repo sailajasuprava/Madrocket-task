@@ -23,36 +23,40 @@ const typesList = [
   "fairy",
 ];
 
-function SearchBar() {
+function SideBar() {
   const { query, setQuery } = useSearch();
   const { filter, setFilter } = useFilter();
   const { sortBy, setSortBy } = useSort();
 
   return (
-    <div className="w-screen p-4 flex flex-col sm:flex-row gap-10 items-center">
+    <div className="p-4 flex flex-col gap-10 items-center">
       <input
         type="text"
         placeholder="Search Pokémon by name..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="border-2 border-stone-700 px-4 py-2 w-72 rounded-md focus:outline-none"
+        className="border-2 border-stone-700 px-4 py-2 w-60 rounded-md focus:outline-none"
       />
 
-      <div>
-        <select
-          name="category"
-          required
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="border-2 border-stone-700 px-4 py-2 rounded-md focus:outline-none"
-        >
-          <option value="">Select category</option>
-          {typesList.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        {typesList.map((type) => (
+          <label key={type} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              value={type}
+              checked={filter.includes(type)}
+              onChange={(e) => {
+                const { value, checked } = e.target;
+                setFilter((prevFilters) =>
+                  checked
+                    ? [...prevFilters, value]
+                    : prevFilters.filter((t) => t !== value)
+                );
+              }}
+            />
+            {type}
+          </label>
+        ))}
       </div>
 
       <div>
@@ -72,4 +76,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default SideBar;

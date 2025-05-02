@@ -1,10 +1,10 @@
 import PokemonList from "../components/PokemonList";
-import SearchBar from "../components/SearchBar";
+import SideBar from "../components/SideBar";
 
 function Home() {
   return (
-    <main>
-      <SearchBar />
+    <main className="flex">
+      <SideBar />
       <PokemonList />
     </main>
   );

@@ -18,13 +18,21 @@ function PokemonList() {
 
   if (isLoading) return <Spinner />;
 
-  let filteredPokemons = pokemons.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(query.toLowerCase())
-  );
+  let filteredPokemons = pokemons;
 
-  if (filter) {
+  console.log(pokemons);
+
+  if (query) {
+    filteredPokemons = pokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  if (filter.length > 0) {
     filteredPokemons = filteredPokemons.filter((pokemon) =>
-      pokemon.types.some((typeInfo) => typeInfo.type.name === filter)
+      filter.some((type) =>
+        pokemon.types.map((t) => t.type.name).includes(type)
+      )
     );
   }
 
@@ -57,9 +65,9 @@ function PokemonList() {
   if (filteredPokemons.length === 0) return <NoResults />;
 
   return (
-    <>
+    <div className="flex-1 px-12">
       {/* pokemon listings */}
-      <div className="max-w-5xl mx-auto px-12 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
         {filteredPokemons.slice(start, end).map((pokemon) => (
           <PokemonCard key={pokemon.name} pokemon={pokemon} />
         ))}
@@ -85,7 +93,7 @@ function PokemonList() {
           Next
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
