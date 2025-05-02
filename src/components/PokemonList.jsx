@@ -20,14 +20,14 @@ function PokemonList() {
 
   let filteredPokemons = pokemons;
 
-  console.log(pokemons);
-
+  // SEARCH
   if (query) {
     filteredPokemons = pokemons.filter((pokemon) =>
       pokemon.name.toLowerCase().includes(query.toLowerCase())
     );
   }
 
+  // FILTER
   if (filter.length > 0) {
     filteredPokemons = filteredPokemons.filter((pokemon) =>
       filter.some((type) =>
@@ -36,6 +36,7 @@ function PokemonList() {
     );
   }
 
+  // SORT
   if (sortBy === "id") {
     filteredPokemons = filteredPokemons.sort((a, b) => a.id - b.id);
   }
@@ -50,6 +51,7 @@ function PokemonList() {
     );
   }
 
+  // PAGINATION
   const totalPages = Math.ceil(filteredPokemons.length / ITEMS_PER_PAGE);
   const start = (page - 1) * ITEMS_PER_PAGE;
   const end = page * ITEMS_PER_PAGE;
