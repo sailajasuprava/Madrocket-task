@@ -3,3 +3,7 @@
 @theme {
   --breakpoint-xs: 30rem;
 }
+
+.active {
+  border-bottom: 4px solid red;
+}
