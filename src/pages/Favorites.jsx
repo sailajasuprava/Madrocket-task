@@ -1,8 +1,10 @@
 import PokemonCard from "../components/PokemonCard";
-import { useSearch } from "../context/SearchContext";
+import { useFavorites } from "../context/FavoritesContext";
+import { usePokemon } from "../context/PokemonContext";
 
 function Favorites() {
-  const { pokemons, favorites } = useSearch();
+  const { pokemons } = usePokemon();
+  const { favorites } = useFavorites();
 
   if (favorites.length === 0) return;
 

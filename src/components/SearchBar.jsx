@@ -1,3 +1,4 @@
+import { useFilter } from "../context/FilterContext";
 import { useSearch } from "../context/SearchContext";
 
 const typesList = [
@@ -22,7 +23,9 @@ const typesList = [
 ];
 
 function SearchBar() {
-  const { query, setQuery, filter, setFilter, sortBy, setSortBy } = useSearch();
+  const { query, setQuery } = useSearch();
+  const { filter, setFilter, sortBy, setSortBy } = useFilter();
+
   return (
     <div className="w-screen p-4 flex flex-col sm:flex-row gap-10 items-center">
       <input

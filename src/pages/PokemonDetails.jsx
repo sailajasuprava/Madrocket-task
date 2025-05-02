@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useSearch } from "../context/SearchContext";
 import Spinner from "../components/Spinner";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import { usePokemon } from "../context/PokemonContext";
+import { useFavorites } from "../context/FavoritesContext";
 
 function PokemonDetails() {
   const { pokemonName } = useParams();
+  const { pokemons } = usePokemon();
+  const { favorites, toggleFavorite } = useFavorites();
 
-  const { pokemons, favorites, toggleFavorite } = useSearch();
   const pokemon = pokemons.filter((item) => item.name === pokemonName)[0];
 
   if (!pokemon) return <Spinner />;

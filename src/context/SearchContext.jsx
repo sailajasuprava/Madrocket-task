@@ -1,72 +1,15 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+import { createContext, useContext, useState } from "react";
 
 const SearchContext = createContext();
 
 function SearchProvider({ children }) {
-  const [pokemons, setPokemons] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("");
-  const [sortBy, setSortBy] = useState("");
-  const [favorites, setFavorites] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || []
-  );
 
-  console.log(favorites);
-
-  useEffect(() => {
-    fetchPokemons();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
-
-  async function fetchPokemons() {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon?limit=150"
-      );
-
-      const detailedPokemon = await Promise.all(
-        response.data.results.map(async (pokemon) => {
-          const res = await axios.get(pokemon.url);
-          return res.data;
-        })
-      );
-      console.log(detailedPokemon);
-
-      setPokemons(detailedPokemon);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
-    );
-  };
   return (
     <SearchContext.Provider
       value={{
         query,
         setQuery,
-        pokemons,
-        setPokemons,
-        isLoading,
-        filter,
-        setFilter,
-        sortBy,
-        setSortBy,
-        favorites,
-        setFavorites,
-        toggleFavorite,
       }}
     >
       {children}

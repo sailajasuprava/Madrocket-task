@@ -3,11 +3,15 @@ import { useSearch } from "../context/SearchContext";
 import NoResults from "./NoResults";
 import PokemonCard from "./PokemonCard";
 import Spinner from "./Spinner";
+import { usePokemon } from "../context/PokemonContext";
+import { useFilter } from "../context/FilterContext";
 
 const ITEMS_PER_PAGE = 10;
 
 function PokemonList() {
-  const { isLoading, pokemons, query, filter, sortBy } = useSearch();
+  const { isLoading, pokemons } = usePokemon();
+  const { query } = useSearch();
+  const { filter, sortBy } = useFilter();
   const [page, setPage] = useState(1);
 
   if (isLoading) return <Spinner />;
